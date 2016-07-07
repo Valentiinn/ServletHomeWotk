@@ -35,7 +35,7 @@ public class University {
     }
 
     private boolean isConnect() throws IOException, SQLException, ClassNotFoundException {
-        Properties properties = loadProperties();
+      //  Properties properties = loadProperties();
         Class.forName("com.mysql.jdbc.Driver");
         connection = DriverManager.getConnection(URL, USER, PASSWORD);
 //        connection = DriverManager.
@@ -46,12 +46,12 @@ public class University {
         return true;
     }
 
-    private Properties loadProperties() throws IOException {
-        Properties properties = new Properties();
-        InputStream stream = getClass().getResourceAsStream("db.properties");
-        properties.load(stream);
-        return properties;
-    }
+//    private Properties loadProperties() throws IOException {
+//        Properties properties = new Properties();
+//        InputStream stream = getClass().getResourceAsStream("db.properties");
+//        properties.load(stream);
+//        return properties;
+//    }
 
     public List<Student> getStudents() throws SQLException {
         String sql = "SELECT lastname, firstname, age FROM students;";
