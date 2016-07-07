@@ -8,6 +8,11 @@ import java.util.List;
 import java.util.Properties;
 
 public class University {
+
+    static final String URL = "jdbc:mysql://localhost:3306/university?serverTimezone=UTC&useSSL=false";
+    static final String USER = "root";
+    static final String PASSWORD = "123456";
+
     private Connection connection;
     private static University instance;
 
@@ -18,6 +23,8 @@ public class University {
             e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
 
@@ -27,24 +34,27 @@ public class University {
         return instance;
     }
 
-    private boolean isConnect() throws IOException, SQLException {
-       // Properties properties = loadProperties();
-
-        connection = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/tictactoe?serverTimezone=UTC&useSSL=false", "root", "123456");
+    private boolean isConnect() throws IOException, SQLException, ClassNotFoundException {
+        Properties properties = loadProperties();
+        Class.forName("com.mysql.jdbc.Driver");
+        connection = DriverManager.getConnection(URL, USER, PASSWORD);
+//        connection = DriverManager.
+//                getConnection(properties.getProperty("url"),
+//                        properties.getProperty("username"),
+//                        properties.getProperty("password"));
 
         return true;
     }
 
-//    private Properties loadProperties() throws IOException {
-//        Properties properties = new Properties();
-//        InputStream stream = getClass().getResourceAsStream("db.properties");
-//        properties.load(stream);
-//        return properties;
-//    }
+    private Properties loadProperties() throws IOException {
+        Properties properties = new Properties();
+        InputStream stream = getClass().getResourceAsStream("db.properties");
+        properties.load(stream);
+        return properties;
+    }
 
     public List<Student> getStudents() throws SQLException {
-        String sql = "SELECT lastname, firstname, age FROM students";
+        String sql = "SELECT lastname, firstname, age FROM students;";
         Statement statement = connection.createStatement();
         statement.execute(sql);
 

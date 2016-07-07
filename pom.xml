@@ -10,19 +10,42 @@
     <packaging>war</packaging>
 
     <dependencies>
+
+        <!-- https://mvnrepository.com/artifact/javax.servlet/servlet-api -->
         <dependency>
             <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
         </dependency>
-        <!-- http://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+
+        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>6.0.2</version>
+            <version>5.1.22</version>
         </dependency>
+
     </dependencies>
+
     <build>
+
         <finalName>University</finalName>
+
+        <plugins>
+
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>9.2.11.v20150529</version>
+                <configuration>
+                    <scanIntervalSeconds>10</scanIntervalSeconds>
+                    <webApp>
+                        <contextPath>/abc</contextPath>
+                    </webApp>
+                </configuration>
+            </plugin>
+        </plugins>
+
     </build>
+
 </project>

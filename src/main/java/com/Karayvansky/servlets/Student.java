@@ -1,6 +1,7 @@
 package com.Karayvansky.servlets;
 
 public class Student {
+
     private String lastname;
     private String firstname;
     private int age;
